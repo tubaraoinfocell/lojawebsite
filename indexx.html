@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tubarão Infocell - Um Oceano de Qualidade</title>
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts: Orbitron -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <!-- GSAP para animações -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        body {
+            background: #121212;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Cabeçalho */
+        header {
+            background: linear-gradient(to bottom, #1e3a8a, #121212);
+            padding: 20px 20px;
+            position: relative;
+            text-align: center;
+        }
+
+        .logo-container {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-container img {
+            width: 100px; /* Tamanho ajustado para não ser muito pequeno */
+            height: auto;
+        }
+
+        .logo-container h1 {
+            font-size: 2em;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgb(255, 255, 255);
+        }
+
+        header .subtitle {
+            font-size: 1.5em;
+            color: #b0c4de;
+            margin-top: 60px; /* Espaço para não grudar na logo/nome */
+            margin-bottom: 20px;
+        }
+
+        header .cta-button {
+            background: #1e3a8a;
+            color: #fff;
+            padding: 10px 25px;
+            border: 2px solid #d61900;
+            border-radius: 20px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        header .cta-button:hover {
+            background: #d61900;
+            color: #121212;
+            transform: scale(1.05);
+        }
+
+        /* Seção Principal */
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            flex: 1; /* Faz o main ocupar o espaço disponível, empurrando o rodapé para baixo */
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .intro h2 {
+            font-size: 1.8em;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(30, 58, 138, 0.5);
+        }
+
+        .intro p {
+            font-size: 1em;
+            color: #b0c4de;
+        }
+
+        .servicos-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .servico-item {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #d61900;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .servico-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(209, 1, 1, 0.685);
+        }
+
+        .servico-item i {
+            font-size: 1.8em;
+            color: #d61900;
+            margin-bottom: 15px;
+        }
+
+        .servico-item h3 {
+            font-size: 1.2em;
+            color: #e0e0e0;
+            margin-bottom: 10px;
+        }
+
+        .servico-item p {
+            font-size: 0.9em;
+            color: #b0c4de;
+        }
+
+        /* Contato */
+        .contact-info {
+            text-align: center;
+            margin-top: 8%;
+            padding: 20px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            border: 1px solid #d61900;
+        }
+
+        .contact-info p {
+            font-size: 1em;
+            color: #b0c4de;
+        }
+
+        /* Botão WhatsApp Flutuante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #39ff14;
+            color: #121212;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* Rodapé */
+        footer {
+            background: #1a1a1a;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #b0c4de;
+            border-top: 3px solid #1e3a8a;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            header .subtitle {
+                font-size: 1em;
+            }
+
+            .intro h2 {
+                font-size: 1.5em;
+            }
+
+            .servico-item {
+                width: 100%;
+            }
+
+            .logo-container img {
+                width: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="./imagens/logo.png" alt="Tubarão Infocell Logo">
+            <h1>Tubarão Infocell</h1>
+        </div>
+        <p class="subtitle">Reparos rápidos e confiáveis para seu celular</p>
+        <button class="cta-button" onclick="window.location.href='https://wa.me/551144876460'">Fale Conosco</button>
+    </header>
+
+    <main>
+        <div class="intro">
+            <h2><i class="fas fa-tools"></i> Seu celular novo de novo!</h2>
+            <p>Localizados no bairro Sumarezinho, oferecemos serviços rápidos e de qualidade. Buscamos e entregamos sem custo adicional.</p>
+        </div>
+
+        <div class="servicos-list">
+            <div class="servico-item">
+                <i class="fas fa-mobile-screen-button"></i>
+                <h3>Troca de Tela</h3>
+                <p>Tela quebrada? Trocamos com peças de alta qualidade em até 3 horas</p>
+            </div>
+            <div class="servico-item">
+                <i class="fas fa-battery-half"></i>
+                <h3>Troca de Bateria</h3>
+                <p>Bateria com defeito? Substituímos por opções certificadas, com garantia de 90 dias.</p>
+            </div>
+            <div class="servico-item">
+                <i class="fas fa-microchip"></i>
+                <h3>Reparo de Placa</h3>
+                <p>Celular não liga? Consertamos placas com precisão, resolvendo falhas técnicas.</p>
+            </div>
+        </div>
+
+        <div class="contact-info">
+            <p>Entre em contato pelo Whatsapp (16) 98871-9896 para agendar seu reparo! Ou clique no botão do Whatsapp -></p>
+        </div>
+    </main>
+
+    <!-- Botão WhatsApp Flutuante -->
+    <a href="https://wa.me/5516988719896" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <footer>
+        <p>© 2025 Tubarão Infocell | Ribeirão Preto, SP </p>
+    </footer>
+
+    <!-- Script do GSAP -->
+    <script>
+        gsap.from(".logo-container img", { duration: 1, x: -50, opacity: 0, ease: "power2.out" });
+        gsap.from(".logo-container h1", { duration: 1, x: 50, opacity: 0, delay: 0.3, ease: "power2.out" });
+        gsap.from("header .subtitle", { duration: 1, y: 50, opacity: 0, delay: 0.6, ease: "power2.out" });
+        gsap.from("header .cta-button", { duration: 1, scale: 0, opacity: 0, delay: 0.9, ease: "back.out(1.7)" });
+        gsap.from(".intro h2", { duration: 1, opacity: 0, y: 50, delay: 1.2 });
+        gsap.from(".servico-item", { duration: 1, opacity: 0, y: 50, stagger: 0.2, delay: 1.5 });
+        gsap.from(".contact-info", { duration: 1, opacity: 0, y: 50, delay: 2 });
+    </script>
+</body>
+</html>
